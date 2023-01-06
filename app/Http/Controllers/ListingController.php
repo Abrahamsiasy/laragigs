@@ -40,5 +40,7 @@ class ListingController extends Controller
             'tags' => 'required',
             'desc' => 'required'
         ]);
+        Listing::create($formField);
+        return redirect('/')->with('message', 'Listing created successfully');
     }
 }
