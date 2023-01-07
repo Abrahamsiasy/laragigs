@@ -30,6 +30,7 @@ class ListingController extends Controller
     //store a listing
     public function store(Request $request){
         // dd($request->all());
+        //dd($request->file('logo'));
         $formField = $request->validate([
             'title' => 'required',
             'company' => ['required', Rule::unique('listings', 'company')],
@@ -40,6 +41,12 @@ class ListingController extends Controller
             'tags' => 'required',
             'desc' => 'required'
         ]);
+
+        //save the log fromthe filed to logs folder in the publick directory
+        if($request->hasFile('logo')) {
+            $formField['logo'] = $request->file('logo')->store('logos', 'public');
+        }
+        //dd($formField);
         Listing::create($formField);
         return redirect('/')->with('message', 'Listing created successfully');
     }
