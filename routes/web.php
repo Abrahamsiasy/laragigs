@@ -40,6 +40,14 @@ Route::middleware('auth')->group(function () {
     //get a signel listing
     Route::get('listing/{listing}', [ListingController::class, 'show'] )->name('list.show');
 
+    //SHOW EDIT FROM
+    Route::get('listing/{listing}/edit', [ListingController::class, 'edit'] )->name('list.edit');
+
+    //Update or Stpore Store edted value
+    Route::put('listing/{listing}', [ListingController::class, 'update'] )->name('list.update');
+    // Delete listing
+    Route::delete('listing/{listing}', [ListingController::class, 'delete'] )->name('list.ddelete');
+
 
     Route::get('/hello', function () {
         return response('hello world');
@@ -54,6 +62,7 @@ Route::middleware('auth')->group(function () {
         dd($request->name . ' ' . $request->city);
         return response();
     });
+
 
 
 });
