@@ -11,13 +11,13 @@ class ListingController extends Controller
     //
     public function index(){
         //dd(auth()->user());
-        if(auth()->user()->hasRole('admin')) {
+
             return view('listings.index', [
                 // 'listings' => Listing::latest()->get()
                 'listings' => Listing::latest()->filter(request(['tag']))->paginate(6)
             ]);
 
-        } else abort(503);
+
     }
 
 
